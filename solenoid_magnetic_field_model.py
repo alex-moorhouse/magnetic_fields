@@ -13,7 +13,7 @@ plt.rcParams['axes.facecolor']='white'
 plt.rcParams['savefig.facecolor']='white'
 
 
-# In[58]:
+# In[7]:
 
 
 #Initialise values of constants
@@ -32,7 +32,7 @@ r = np.zeros_like(x)
 r = np.sqrt(x**2+y**2)
 
 #Define a function for returning a grid of values of the magnetic field magnitude.
-def solenoid_B_field(r,a,n,I,e,mu0):
+def solenoid_B_field(r,a,n,I,mu0):
     
     B_circ = mu0*I*(1/n)/(2*np.pi*r*np.sqrt(4*((np.pi*a)**2)+1/(n**2)))
 
@@ -55,11 +55,12 @@ def solenoid_B_field(r,a,n,I,e,mu0):
 nvals = np.array((np.arange(250, 5, -5)).tolist() + (np.arange(5,0, -0.25)).tolist())
 count = 100
 for n in nvals:
-    plt.imshow(solenoid_B_field(r,a,n,I,e,mu0), vmin=0, vmax=0.013,extent=[-axis_size, axis_size, -axis_size, axis_size])
+    plt.imshow(solenoid_B_field(r,a,n,I,mu0), vmin=0, vmax=0.013,extent=[-axis_size, axis_size, -axis_size, axis_size])
     plt.colorbar()
     plt.text(-0.025,-0.035,'$n = {}, I = {}$'.format(str(n), str(I)+' A'))
-    plt.xlabel('x [a]')
-    plt.ylabel('y [a]')
+    plt.text(0.042, -0.015, 'Magnetic Flux Density [T]', rotation='vertical')
+    plt.xlabel('x [m]')
+    plt.ylabel('y [m]')
     plt.savefig('snd'+str(count)+'.png', bbox_inches='tight', dpi=150)
     plt.show()
     count+=1
